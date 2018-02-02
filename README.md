@@ -1,10 +1,10 @@
-Welcome to your final checkpoint at Fullstack Academy!
+Bienvenido a tu ultimo Checkpoint en Plataforma 5
 
-## Resources
+## Recursos
 
-Except for existing *codebases* (from workshops / checkpoints / projects you've done, or library / solution code), you are allowed to use any resources you'd like. That includes all documentation and workshop *instructions*.
+Exceptuando tu _código escrito_ (de workshops / checkpoints / proyectos que hayas hecho, o librerías / soluciones), tenes permitido usar cualquier recurso que quieras. Eso incluye documencación e _instrucciones_ de workshops.
 
-Please make sure you complete specs located in the following files:
+Asegurate de completar los specs que estan en los siguientes archivos:
 
 `tests/01-react/react-tests.js`
 
@@ -12,17 +12,17 @@ Please make sure you complete specs located in the following files:
 
 `tests/03-js/flatline-test.js`
 
-#### This is the recommended order in which you complete each test; however, they do not depend on each other! If you get stuck or want to work in a different order, you should be able to.
+#### Este es el orden recomendado en el cual completes cada test, sin embargo, no son dependientes uno del otro! Si te trabás o querés trabajar en un orden diferente deberías ser capáz.
 
-## Getting started
+## Comenzando
 
-**Fork** and clone this repository. Run `npm install`, then execute the following to run all tests:
+**Forkea** y clona este repositorio. Corre `npm install`, y luego ejecutá lo siguiente para correr todos los tests:
 
 ```bash
 npm test
 ```
 
-To run only _specific_ test suites, you can optionally do any of the following:
+Para correr un conjunto de tests _específicos_, podes opcionalmente hacer cualquiera de los siguientes comandos:
 
 ```bash
 npm run server-test
@@ -31,18 +31,18 @@ npm run js-test
 npm run extra-credit
 ```
 
-To only run a specific `describe` or `it`, you can also chain `.only`:
+Para solo correr un `describe` o `it`, podés también encadenar un `.only`:
 
 ```js
-it.only('does something', testFunc);
+it.only('Hace algo', testFunc);
 ```
 
-## Extra Credit
+## Credito Extra
 
-For the brave, the extra credit (implementing Promise.map) is available in `tests/04-extra-credit`. Run with `npm run extra-credit`.
+Para los valientes, el extra crédito (implementar `Promise.map`) esta disponible en `tests/04-extra-credit`. Correlo con `npm run extra-credit`.
 
-## Submit
+## Entrega
 
 1. `git add -A`
-2. `git commit -m 'submission for deadline'`
+2. `git commit -m 'entrega final'`
 3. `git push origin master`

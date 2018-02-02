@@ -3,20 +3,21 @@ import User from './user-model';
 import Message from './message-model';
 
 /*
-    You may not have seen the following method of association before.
+    Podrías no haber visto el siguiente método de asociación antes.
 
-    The following two lines add two additional columns to
-    the `messages` table: `toId` and `fromId`.
+    Las siguientes dos lineas agregan dos columnas adicionales a 
+    la tabla `messages`: `toId` y `fromId`.
 
-    The `as` key in the options object is called an "alias"
-    and allows for us to associate foreign keys of the same entity--
-    in this case, user--more than once on a single model/table.
+    La propiedad `as` en el objeto de opciones es llamado un "alias"
+    y nos permite asociar foreign key de la misma entidad, en este caso
+    user, más de una vez en una sola tabla/modelo.
 
-    These aliases will be important to remember and reference throughout
-    the server portion of the checkpoint.
-
+    Estas aliases van a ser importantes de recordar y referenciar durante 
+    la parte del servidor del checkpoint.
+    
     http://sequelize.readthedocs.io/en/v3/docs/associations/#naming-strategy
- */
+*/
+
 Message.belongsTo(User, { as: 'to' });
 Message.belongsTo(User, { as: 'from' });
 

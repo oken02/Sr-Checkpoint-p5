@@ -15,26 +15,26 @@ import sinon from 'sinon';
 
 describe('▒▒▒ Backend tests ▒▒▒', () => {
 
-    beforeEach('Synchronize and clear database', () => db.sync({force: true}));
+    beforeEach('Sincroniza y limpia tu base de datos', () => db.sync({force: true}));
 
-    after('Synchronize and clear database', () => db.sync({force: true}));
+    after('Sincroniza y limpia tu base de datos', () => db.sync({force: true}));
 
-    describe('Sequelize models', function () {
+    describe('Modelos Sequlize', function () {
 
-        describe('User Model', () => {
+        describe('Modelo User', () => {
 
-            // *Assertion translation*:
-            // This assertion expects that the User model will
-            // put an `email` column in the users table.
-            xit('has the expected schema definition', () => {
+            // *Traducción del Assertion*:
+            // Este assertion espera que el modelo User va a
+            // poner una columna `email` en la tabla users.
+            xit('tiene la definición de schema esperado', () => {
                 expect(User.attributes.email).to.be.an('object');
             });
 
-            describe('validations', () => {
+            describe('validaciones', () => {
 
-                // *Assertion translation*:
-                // The `email` column should be a required field.
-                xit('require email', () => {
+                // *Traducción del Assertion*:
+                // La columand `email` debería ser un campo requerido.
+                xit('requiere email', () => {
                     const user = User.build();
                     return user.validate()
                         .then(() => { throw new Error('Promise should have rejected');})
@@ -52,36 +52,36 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
         });
 
-        describe('Message Model', () => {
+        describe('Modelo Message', () => {
 
-            describe('definition', () => {
+            describe('definición', () => {
 
-                // *Assertion translation*:
-                // This assertion expects that the Message model will
-                // put a `subject` column in the messages table.
-                xit('has expected subject definition', () => {
+                // *Traducción del Assertion*:
+                // Este assertion espera que el modelo Message ponga una
+                // columna `subject` en la tabla messages.
+                xit('tiene la definición de subject esperada', () => {
                     expect(Message.attributes.subject).to.be.an('object');
                 });
 
-                // *Assertion translation*:
-                // This assertion expects that the Message model will
-                // put an `body` column in the messages table.
+                // *Traducción del Assertion*:
+                // Este assertion espera que el modelo Message vaya a
+                // poner la columna `body` en la tabla messages
                 xit('has expected body definition', () => {
                     expect(Message.attributes.body).to.be.an('object');
                 });
 
             });
 
-            describe('validations', () => {
+            describe('validaciones', () => {
 
-                xit('defaults subject to "No Subject"', () => {
-                    // .build creates an instance of a model
-                    // without saving the represented data to the database.
+                xit('tiene un valor por defecto "No Subject"', () => {
+                    // .build crea una instancia de un modelo
+                    // sin salvar la data representada a la base de datos.
                     const message = Message.build();
                     expect(message.subject).to.be.equal('No Subject');
                 });
 
-                xit('requires a body', () => {
+                xit('requiere un body', () => {
                     const message = Message.build();
                     return message.validate()
                         .then(() => { throw new Error('Promise should have rejected');})
@@ -97,7 +97,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
             });
 
-            describe('functionality', () => {
+            describe('funcionalidad', () => {
 
                 let annaId;
                 let elsaId;
@@ -148,21 +148,21 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
                 });
 
-                describe('class methods', () => {
+                describe('métodos de clase', () => {
 
-                    // Be sure to read the large comment in server/models/index.js
-                    // before attempting the following assertions.
+                    // Asegurate de leer el largo comentario en server/models/index.js
+                    // antes de intentar el siguiente assertion.
                     describe('getAllWhereSender', () => {
 
-                        xit('exists', () => {
+                        xit('existe', () => {
                             expect(Message.getAllWhereSender).to.be.a('function');
                         });
 
-                        xit('returns a promise', () => {
+                        xit('retorna una promise', () => {
                             expect(Message.getAllWhereSender(annaId).then).to.be.a('function');
                         });
 
-                        xit('resolves to all the messages sent by Anna', () => {
+                        xit('resuelve a todos los mensajes enviados por Anna', () => {
                             return Message.getAllWhereSender(annaId)
                                 .then(messages => {
                                     expect(messages.length).to.be.equal(2);
@@ -171,7 +171,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                                 });
                         });
 
-                        xit('resolves to all the messages sent by Elsa', () => {
+                        xit('resuelve a todos los mensajes enviados por Elsa', () => {
                             return Message.getAllWhereSender(elsaId)
                                 .then(messages => {
                                     expect(messages.length).to.be.equal(1);
@@ -180,22 +180,22 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                         });
 
 
-                        xit('EAGERLY LOADS the full information of both the sender and receiver', () => {
+                        xit('Carga (EAGERLY LOADS) la información completa de ambos en remitente y el receptor', () => {
 
                             // http://sequelize.readthedocs.io/en/v3/docs/models-usage/#eager-loading
-                            // Don't forget about the aliases explained in server/models/index.js!
+                            // No te olvides de aliases explicadas en server/models/index.js!
 
                             return Message.getAllWhereSender(elsaId)
                                 .then(messages => {
 
                                     const theMessage = messages[0];
 
-                                    // Expect the first of the found messages to have `to` and `from` properties that are objects.
+                                    // Espera que el primer de los mensajes encontrados tenga las propiedades `to` y `from` que son objetos
                                     expect(theMessage.to).to.be.an('object');
                                     expect(theMessage.from).to.be.an('object');
 
-                                    // Expect the email properties of those objects to match up to the
-                                    // associated users who sent/received the message.
+                                    // Espera que la propiedad email de esos objetos coincidan con el de
+                                    // los usuarios asociados que enviaron/recibieron el mensaje
                                     expect(theMessage.to.email).to.be.equal('anna@gmail.com');
                                     expect(theMessage.from.email).to.be.equal('elsa@gmail.com');
 
@@ -206,7 +206,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
                 });
 
-                describe('instance methods', () => {
+                describe('métodos de instancia', () => {
 
                     describe('truncateSubject', () => {
 
@@ -224,16 +224,16 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                             expect(testMessage.truncateSubject).to.be.a('function');
                         });
 
-                        xit('returns the full message object but with a limited subject text based on a passed in number to determine its length', () => {
-                            // Here we are expecting that the *return value* of .truncateSubject()
-                            // is *full instance object of message* with its .subject property altered.
+                        xit('retorna el objeto mensaje completo pero con el texto del subject limitado basado en el número pasado para determinar su length', () => {
+                            // Aquí estamos esperando que el *valor retornado* de .truncateSubject()
+                            // es *la instancia completa del objeto message* con su propiedad .subject alterada.
                             const messageWithTruncatedSubject = testMessage.truncateSubject(12);
                             expect(messageWithTruncatedSubject).to.be.an('object');
                             expect(messageWithTruncatedSubject.body).to.be.equal(`But I'm somewhere in that zone`);
                             expect(messageWithTruncatedSubject.subject).to.be.equal(`I don't know`);
                         });
 
-                        xit('adds an ellipses (...) after the truncated text if true is passed as the second argument', () => {
+                        xit('agrega puntos suspensivos (...) luego del texto truncado si true es pasado como un segundo argumento', () => {
                             expect(testMessage.truncateSubject(4, true).subject).to.be.equal('I do...');
                         });
 
@@ -247,10 +247,10 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
     });
 
-    describe('HTTP Server', () => {
+    describe('Servidor HTTP', () => {
 
         let agent;
-        beforeEach('Set up agent for testing', () => {
+        beforeEach('Setea el agente para testear', () => {
             agent = supertest(app);
         });
 
@@ -304,7 +304,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
             describe('users', () => {
 
-                xit('serves up all users on request to GET /', () => {
+                xit('sirve todos los usuarios en el pedido de GET /', () => {
                     return agent
                         .get('/users')
                         .expect(200)
@@ -316,7 +316,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                         });
                 });
 
-                xit('updates a user at PUT /{{usersId}}, sending a 201 response', () => {
+                xit('actualiza un usuario en PUT /{{usersId}}, enviando un 201 como respuesta', () => {
                     return agent
                         .put(`/users/${obama}`)
                         .send({
@@ -335,9 +335,9 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
             describe('messages', () => {
 
-                // find all messages whose `to` field matches the variable ID
+                // encuentra todos los mensajes done el campo `to` coincida con la variable ID
 
-                xit('serves up all messages to a specific user on GET /to/{{recipientId}}', () => {
+                xit('sirve todos los mensajes de un usuario específico en GET /to/{{recipientId}}', () => {
                     return agent
                         .get(`/messages/to/${obama}`)
                         .expect(200)
@@ -348,9 +348,9 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                         });
                 });
 
-                // find all messages whose `from` field matches the variable ID
+                // encuentra todos los mensajes donde el campo `from` coincida con la variable ID
 
-                xit('serves up all messages from a specific sender on GET /from/{{senderId}}', () => {
+                xit('sirve todos los mensajes de un remitente especifico en GET /from/{{senderId}}', () => {
                     return agent
                         .get(`/messages/from/${obama}`)
                         .expect(200)
@@ -362,9 +362,9 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                         });
                 });
 
-                // remember eager loading?
+                // recuerdas eager loading?
 
-                xit('serves up all messages—WITH FILLED IN REFERENCES—to a specific user on GET /to/{{recipientId}}', () => {
+                xit('sirve todos los mensajes completada con referencia a los usuarios específicos en GET /to/{{recipientId}}', () => {
                     return agent
                         .get(`/messages/to/${obama}`)
                         .expect(200)
@@ -376,8 +376,8 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                         });
                 });
 
-                xit(`serves up all messages from a specific sender on GET /from/{{senderId}}
-                    and uses the Message model static getAllWhereSender in the process`, () => {
+                xit(`sirve todos los mensajes de un remitente especifico en GET /from/{{senderId}}
+                    y usa el método estatico delmodelo Message getAllWhereSender en el proceso`, () => {
 
                     // http://sinonjs.org/docs/#spies
                     const getAllWhereSenderSpy = sinon.spy(Message, 'getAllWhereSender');
@@ -399,7 +399,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
                 });
 
-                xit('adds a new message on POST /, responding with 201 and created message', () => {
+                xit('agrega un nuevo mensaje en adds POST /, respondiendo con un 201 y creando el mensaje', () => {
 
                     return agent
                         .post('/messages')

@@ -4,7 +4,7 @@ import Inbox from './components/Inbox';
 import NewMessageForm from './components/NewMessageForm';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
-/* For you to be able to visualize everything, you will need to give similar data to each component that each test gives to the component */
+/* Para que puedas visualizar todo, vas a necesitar darle data similar a cada componente que cada test le da al componente */
 
 ReactDOM.render(
 	<Router>

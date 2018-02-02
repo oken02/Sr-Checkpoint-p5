@@ -3,7 +3,7 @@ import db from '../models';
 const Message = db.model('message');
 const User = db.model('user');
 
-// This router is already mounted on /messages in server/app.js
+// Este router esta ya montado en /messages en server/app.js
 const router = express.Router();
 
 

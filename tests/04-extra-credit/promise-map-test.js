@@ -12,31 +12,32 @@ const readFile = function (filePath) {
     });
 };
 
-// The following line should add a .map function on the es6-promise Promise object
-// ... which will be the system under test.
-// Notice that we are not using an exported value.
+// La siguiente linea debería añadir una función .map al objeto de es6-promise Promise
+// ... la cual va ser el sistema a testear.
+// Notece que no estamos utilizando un valor exportado.
+
 require('../../extra-credit/promise-map');
 
 describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
 
     describe('Promise.map', () => {
 
-        beforeEach('Remove Promise.all', () => {
-            // Promise.all makes some parts of this challenge negligible
-            // This beforeEach attempts to remove its existence.
-            // Do not use Promise.all in your implementation!
+        beforeEach('Remueve Promise.all', () => {
+            // Promise.all hace trivial algunas partes de este desafio
+            // Este beforeEach busca remover su existencia.
+            // No uses Promise.all en tu implementacion!
             Promise.all = null;
         });
 
-        xit('is a function that returns a promise', () => {
+        xit('Es una función que retorna una promesa', () => {
             expect(Promise.map).to.be.a('function');
             const returnValue = Promise.map(['./package.json'], () => true);
             expect(returnValue).to.be.an.instanceof(Promise);
         });
 
-        describe('returned promise', () => {
+        describe('promesa retornada', () => {
 
-            xit('resolves to elements of the input array transformed by given iterator', () => {
+            xit('resuelve a elementos del arreglo ingresado transformado por iterador dado', () => {
 
                 const returnedPromise = Promise.map(
                     ['./package.json', './README.md'],
@@ -51,7 +52,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
 
             });
 
-            xit('rejects with the error thrown by the first iterator to throw an error', () => {
+            xit('rechaza con el error arrojado por el primer iterador que arroje un error', () => {
 
                 const returnedPromise = Promise.map(
                     ['./package.json', './README.md', './.gitignore'],
@@ -76,7 +77,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
 
         });
 
-        describe('returning a promise from the iterator', () => {
+        describe('retornando una promesa del iterador', () => {
 
             let filePaths;
 
@@ -86,7 +87,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
                 );
             });
 
-            xit('has the transformed value be the resolved value of the promise', () => {
+            xit('el valor transoformado es el valor resuelto por la promesa', () => {
 
                 const mapPromise = Promise.map(filePaths, filePath => {
                     return readFile(filePath)
@@ -101,7 +102,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
 
             });
 
-            xit('maintains the order of the input array', () => {
+            xit('mantiene el orden del arreglo de entrada', () => {
 
                 const mapPromise = Promise.map(filePaths, filePath => {
                     return readFile(filePath)
@@ -116,7 +117,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
 
             });
 
-            xit('rejects the map promise if iterator returns a promise that rejects', () => {
+            xit('rechaza la promesa del map si el iterador retorna una promesa que es rechazada', () => {
 
                 filePaths.push('LOLTOTALLYNOTAFILE!!.txt');
 
@@ -137,7 +138,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
 
         });
 
-        describe('promises in input array', () => {
+        describe('promesas en el arreglo de entrada', () => {
 
             let filePaths;
 
@@ -160,7 +161,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
 
             });
 
-            xit('calls the iterator function with the resolved value of the promise', () => {
+            xit('llama al iterador de la función con el valor resuelto de la promesa', () => {
 
                 const spy = sinon.spy();
 
@@ -189,7 +190,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
 
             });
 
-            xit('rejects the map promise if a promise in the input array rejects', () => {
+            xit('rechaza la promesa de map si una promesa del arreglo de entrada es rechazada', () => {
 
                 const rejectError = new Error('World exploded!!!');
 
