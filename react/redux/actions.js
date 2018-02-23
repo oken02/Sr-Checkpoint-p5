@@ -1,21 +1,7 @@
 import { MESSAGES_RECEIVED, MESSAGES_LOADING, NEW_MESSAGE } from './constants';
 
-export const createMessagesReceivedAction = (messages) => {
-    return {
-        type: MESSAGES_RECEIVED,
-        messages: messages
-    }
-};
+export const createMessagesReceivedAction = () => {};
 
-export const createLoadingAction = () => {
-    return {
-        type: MESSAGES_LOADING,
-    }
-};
+export const createLoadingAction = () => {};
 
-export const createNewMessageAction = (newMessage) => {
-    return {
-        type: NEW_MESSAGE,
-        message: newMessage
-    }
-};
+export const createNewMessageAction = () => {};
