@@ -1,7 +1,7 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import sinon from 'sinon';
 
-import {groupBy, flowRight} from '../../server/flatline';
+import { groupBy, flowRight } from '../../server/flatline';
 
 describe('▒▒▒ JavaScript tests ▒▒▒', function () {
     /*  Estos estan basados en métodos de lodash. 
@@ -58,14 +58,14 @@ describe('▒▒▒ JavaScript tests ▒▒▒', function () {
                 ];
             });
 
-            xit('retorna un object', () => {
+            it('retorna un object', () => {
                 const returnValue = groupBy(users, user => user.age > 13);
                 expect(returnValue).to.be.an('object');
             });
 
             describe('el objeto retornado', () => {
 
-                xit('tiene llaves que coinciden con los valores retornados del iterador y el valor de cada propiedad es un arreglo de los elementos que fueron el parametro cuando la llave fue retornada', () => {
+                it('tiene llaves que coinciden con los valores retornados del iterador y el valor de cada propiedad es un arreglo de los elementos que fueron el parametro cuando la llave fue retornada', () => {
 
                     const returnValue = groupBy(users, user => {
                         if (user.age > 13) {
@@ -85,7 +85,7 @@ describe('▒▒▒ JavaScript tests ▒▒▒', function () {
 
                 });
 
-                xit('toma y agrupa por una propiedad específica si un string es provisto en vez de una función', () => {
+                it('toma y agrupa por una propiedad específica si un string es provisto en vez de una función', () => {
 
                     const returnValue = groupBy(users, 'state');
 
@@ -181,21 +181,21 @@ describe('▒▒▒ JavaScript tests ▒▒▒', function () {
                 Math.max.restore();
             });
 
-            xit(`retorna una nueva función que llama la función provista de derecha a izquierda
+            it(`retorna una nueva función que llama la función provista de derecha a izquierda
                 con el valor retornado de la función anterior, y finalmente evalua 
                 al valor retornado de función más a la izquierda`, () => {
 
-                const add3 = flowRight(add2, add1);
+                    const add3 = flowRight(add2, add1);
 
-                const returnValue = add3(0);
+                    const returnValue = add3(0);
 
-                expect(add1.calledWith(0)).to.be.equal(true);
-                expect(add2.calledWith(1)).to.be.equal(true);
-                expect(returnValue).to.be.equal(3);
+                    expect(add1.calledWith(0)).to.be.equal(true);
+                    expect(add2.calledWith(1)).to.be.equal(true);
+                    expect(returnValue).to.be.equal(3);
 
-            });
+                });
 
-            xit('toma una cantidad arbitraria de funciones para componer', () => {
+            it('toma una cantidad arbitraria de funciones para componer', () => {
                 const add1ThenMultiplyBy3ThenDivideBy2 = flowRight(divide2, multiply3, add1);
 
                 const returnValue1 = add1ThenMultiplyBy3ThenDivideBy2(1);
@@ -214,7 +214,7 @@ describe('▒▒▒ JavaScript tests ▒▒▒', function () {
 
             });
 
-            xit('llama a la función más a la aderecha con el argumento dado', () => {
+            it('llama a la función más a la aderecha con el argumento dado', () => {
 
                 const multiplyMaxBy3 = flowRight(multiply3, mathMaxSpy);
 

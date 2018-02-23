@@ -1,12 +1,12 @@
 import React from 'react';
-import {createStore} from 'redux';
-import {range, last} from 'lodash';
+import { createStore } from 'redux';
+import { range, last } from 'lodash';
 
-import chai, {expect} from 'chai';
+import chai, { expect } from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 chai.use(chaiEnzyme());
-import {shallow} from 'enzyme';
-import {spy} from 'sinon';
+import { shallow } from 'enzyme';
+import { spy } from 'sinon';
 import sinonChai from 'sinon-chai';
 chai.use(sinonChai);
 import faker from 'faker';
@@ -16,15 +16,15 @@ import Inbox from '../../react/components/Inbox';
 import NewMessageForm from '../../react/components/NewMessageForm';
 import rootReducer from '../../react/redux/reducer';
 import actualStore from '../../react/redux/store';
-import {MESSAGES_RECEIVED, MESSAGES_LOADING, NEW_MESSAGE} from '../../react/redux/constants';
-import {createLoadingAction, createMessagesReceivedAction, createNewMessageAction} from '../../react/redux/actions';
+import { MESSAGES_RECEIVED, MESSAGES_LOADING, NEW_MESSAGE } from '../../react/redux/constants';
+import { createLoadingAction, createMessagesReceivedAction, createNewMessageAction } from '../../react/redux/actions';
 
 const createRandomMessages = amount => {
     return range(0, amount).map(index => {
         return {
             id: index + 1,
-            from: {email: faker.internet.email()},
-            to: {email: faker.internet.email()},
+            from: { email: faker.internet.email() },
+            to: { email: faker.internet.email() },
             subject: faker.lorem.sentence(),
             body: faker.lorem.paragraph()
         };
@@ -52,8 +52,8 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             beforeEach('Crea un wrapper para <Message /> ', () => {
                 messageData = {
                     id: 5,
-                    from: {email: 'guille@plataforma5.la'},
-                    to: {email: 'toni@plataforma5.la'},
+                    from: { email: 'guille@plataforma5.la' },
+                    to: { email: 'toni@plataforma5.la' },
                     subject: 're: curriculum updates',
                     body: 'Deberíamos enseñar React!'
                 };
@@ -64,20 +64,20 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             // hagas es completar cada JSX tag (h1, h2, etc.) en el método render
             // para que matchie el string HTML mostrado. Podés pasar esto en una 
             // manera "trivial", pero mira más o menos 5 tests abajo para entender el giro... 
-     
-            xit('incluye el "FROM" como un h1', () => {
+
+            it('incluye el "FROM" como un h1', () => {
                 expect(messageWrapper.find('h1')).to.have.html('<h1>From: <span>guille@plataforma5.la</span></h1>');
             });
 
-            xit('incluye el "TO" como un h2', () => {
+            it('incluye el "TO" como un h2', () => {
                 expect(messageWrapper.find('h2')).to.have.html('<h2>To: <span>toni@plataforma5.la</span></h2>');
             });
 
-            xit('incluye el "SUBJECT" como un h3', () => {
+            it('incluye el "SUBJECT" como un h3', () => {
                 expect(messageWrapper.find('h3')).to.have.html('<h3>Subject: <span>re: curriculum updates</span></h3>');
             });
 
-            xit('incluye el "BODY" como un p', () => {
+            it('incluye el "BODY" como un p', () => {
                 expect(messageWrapper.find('p')).to.have.html('<p>Deberíamos enseñar React!</p>');
             });
 
@@ -87,11 +87,11 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             // debería variar basado en la data pasada. ¿De dónde proviene esa data?
             // ¿Cómo obtenes acceso a él? Volve al `beforeEach` block para verlo.
 
-            xit('no esta harcodeado', () => {
+            it('no esta harcodeado', () => {
                 const aDifferentMessage = {
                     id: 6,
-                    from: {email: 'toni@plataforma5.la'},
-                    to: {email: 'guille@plarafroma5.la'},
+                    from: { email: 'toni@plataforma5.la' },
+                    to: { email: 'guille@platafroma5.la' },
                     subject: 'Re: In re: curriculum updates',
                     body: 'Joyaaa!'
                 };
@@ -122,7 +122,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             // como agregar un click handler que llame a la función con los argumentos
             // específicos
 
-            xit('cuando clickeamos, invoca una función pasada como la propiedad markAsRead con el id del mensaje', () => {
+            it('cuando clickeamos, invoca una función pasada como la propiedad markAsRead con el id del mensaje', () => {
 
                 // La función pasada al `markAsRead` no debería ser llamada inmediatamente.
                 expect(markAsReadSpy).not.to.have.been.called; // eslint-disable-line
@@ -154,7 +154,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
         let inboxWrapper;
         beforeEach('Crea <Inbox />', () => {
-            inboxWrapper = shallow(<Inbox />, {context: {store: actualStore}});
+            inboxWrapper = shallow(<Inbox />, { context: { store: actualStore } });
             // estamos simulando el montado del componente simplemente llamando el método `componentDidMount` para este componente (si haz definido uno)
             if (inboxWrapper.instance().componentDidMount) {
                 inboxWrapper.instance().componentDidMount();
@@ -163,7 +163,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
         // ¿Cómo (o dónde) definís el estado inicial de un componente de React?
 
-        xit('empieza con un estado inicial de un arreglo vacío de mensajes', () => {
+        it('empieza con un estado inicial de un arreglo vacío de mensajes', () => {
             const currentState = inboxWrapper.state();
             expect(currentState.messages).to.be.deep.equal([]);
         });
@@ -172,10 +172,10 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
             // No te preocupes sobre `markAsRead`, Esto no corresponde a este a estos tests
 
-            xit('esta compuesto de componentes <Message /> (NOTA: no es necesario un prop `markAsRead`)  basado en que es colocado en el estado', () => {
+            it('esta compuesto de componentes <Message /> (NOTA: no es necesario un prop `markAsRead`)  basado en que es colocado en el estado', () => {
 
                 // Esto va a alterar el *estado local* del componente (`this.state`).
-                inboxWrapper.setState({messages: randomMessages});
+                inboxWrapper.setState({ messages: randomMessages });
                 // Debería haber ahora un montón de componentes `Message` en el output.
                 expect(inboxWrapper.find(Message)).to.have.length(10);
 
@@ -185,7 +185,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
                 expect(firstMessage.equals(<Message fullMessage={randomMessages[0]} />)).to.be.true; // eslint-disable-line
 
                 // Este va a setear el estado local del componente.
-                inboxWrapper.setState({messages: randomMessages.slice(4)});
+                inboxWrapper.setState({ messages: randomMessages.slice(4) });
                 expect(inboxWrapper.find(Message)).to.have.length(6);
 
             });
@@ -208,7 +208,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             newMessageFormWrapper = shallow(<NewMessageForm onSend={sendSpy} />);
         });
 
-        xit('setea el estado local cuando el input cambia', () => {
+        it('setea el estado local cuando el input cambia', () => {
 
             expect(newMessageFormWrapper.state()).to.be.deep.equal({
                 recipient: '',
@@ -224,20 +224,20 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             // El test spec esta buscando un campo del form específico
             const recipientInput = newMessageFormWrapper.find('#recipient-field');
             // Ahora causamos un cambio, con nueva data
-            recipientInput.simulate('change', {target: {value: 'facu@plataforma5.la', name: 'recipient'}});
+            recipientInput.simulate('change', { target: { value: 'facu@plataforma5.la', name: 'recipient' } });
             // El estado debería haber actualizado su estado correctamente
             expect(newMessageFormWrapper.state()).to.have.property('recipient', 'facu@plataforma5.la')
             expect(newMessageFormWrapper.state()).to.have.property('subject', '')
             expect(newMessageFormWrapper.state()).to.have.property('body', '')
 
             const subjectInput = newMessageFormWrapper.find('#subject-field');
-            subjectInput.simulate('change', {target: {value: 'Hola?', name: 'subject'}});
+            subjectInput.simulate('change', { target: { value: 'Hola?', name: 'subject' } });
             expect(newMessageFormWrapper.state()).to.have.property('recipient', 'facu@plataforma5.la')
             expect(newMessageFormWrapper.state()).to.have.property('subject', 'Hola?')
             expect(newMessageFormWrapper.state()).to.have.property('body', '')
 
             const bodyInput = newMessageFormWrapper.find('#body-field');
-            bodyInput.simulate('change', {target: {value: `Ya todos bajaron a comer?`, name: 'body'}});
+            bodyInput.simulate('change', { target: { value: `Ya todos bajaron a comer?`, name: 'body' } });
             expect(newMessageFormWrapper.state()).to.have.property('recipient', 'facu@plataforma5.la')
             expect(newMessageFormWrapper.state()).to.have.property('subject', 'Hola?')
             expect(newMessageFormWrapper.state()).to.have.property('body', `Ya todos bajaron a comer?`)
@@ -248,7 +248,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
         // pase, el componente debería 1) invocar el prop `onSend`, y 2) pasar
         // el estado actual del componente. state.
 
-        xit('invoca la función `onSent` pasada con el estado local cuando el formulario se submitea', () => {
+        it('invoca la función `onSent` pasada con el estado local cuando el formulario se submitea', () => {
 
             const formInfo = {
                 recipient: 'santi@plaraforma5.la',
@@ -259,7 +259,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             newMessageFormWrapper.setState(formInfo);
 
             // Esto va a disparar cualquier onSubmit handler registrado en el componente.
-            newMessageFormWrapper.simulate('submit', {preventDefault: () => {}});
+            newMessageFormWrapper.simulate('submit', { preventDefault: () => { } });
 
             expect(newMessageFormWrapper.find('form').prop('onSubmit')).to.be.a('function');
             expect(sendSpy).to.have.been.called; // eslint-disable-line
@@ -278,7 +278,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
             describe('createMessagesReceivedAction', () => {
 
-                xit('retorna la descripción de la accion esperada', () => {
+                it('retorna la descripción de la accion esperada', () => {
 
                     const messages = testUtilities.createRandomMessages(5);
 
@@ -299,7 +299,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
             describe('createLoadingAction', () => {
 
-                xit('retorna la descripción de la acción esperada', () => {
+                it('retorna la descripción de la acción esperada', () => {
 
                     const actionDescriptor = createLoadingAction();
 
@@ -313,7 +313,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
             describe('createNewMessageAction', () => {
 
-                xit('retorna la descripción de la acción esperada', () => {
+                it('retorna la descripción de la acción esperada', () => {
 
                     const message = testUtilities.createOneRandomMessage();
 
@@ -340,7 +340,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
                 testingStore = createStore(rootReducer);
             });
 
-            xit('tiene un estado inicial como el descripto', () => {
+            it('tiene un estado inicial como el descripto', () => {
                 const currentStoreState = testingStore.getState();
                 // Nuestro estado inicial tiene dos propiedades como se muestran.
                 expect(currentStoreState.messagesLoading).to.be.equal(false);
@@ -351,7 +351,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
             describe('reducer en MESSAGES_LOADING', () => {
 
-                xit('afecta el estado seteando messagesLoading a true y messages a un arreglo vacío', () => {
+                it('afecta el estado seteando messagesLoading a true y messages a un arreglo vacío', () => {
 
                     // una acción es dispatcheada...
                     testingStore.dispatch({
@@ -367,7 +367,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
                 });
 
-                xit('crea un NUEVO objeto de estado en cualquier acción dispatcheada', () => {
+                it('crea un NUEVO objeto de estado en cualquier acción dispatcheada', () => {
 
                     const currentStoreState = testingStore.getState();
 
@@ -389,12 +389,12 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             describe('reducer en MESSAGES_RECEIVED', () => {
 
                 beforeEach('inicializa el store para que cargue mensajes', () => {
-                    testingStore.replaceReducer(() => ({...testingStore.getState(), messagesLoading: false}));
-                    testingStore.dispatch({type: 'INITIALIZE_FOR_MESSAGES_RECEIVED_TEST'});
+                    testingStore.replaceReducer(() => ({ ...testingStore.getState(), messagesLoading: false }));
+                    testingStore.dispatch({ type: 'INITIALIZE_FOR_MESSAGES_RECEIVED_TEST' });
                     testingStore.replaceReducer(rootReducer);
                 });
 
-                xit('afecta el estado seteando messagesLoading a false y los messages a  losmensajes dispatcheados', () => {
+                it('afecta el estado seteando messagesLoading a false y los messages a  losmensajes dispatcheados', () => {
 
                     const randomMessages = testUtilities.createRandomMessages(10);
 
@@ -420,11 +420,11 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
                     testingStore = createStore(
                         rootReducer,
                         // esto solo setea el estado incial de nuestro store.
-                        {messagesLoading: false, messages: existingRandomMessages}
+                        { messagesLoading: false, messages: existingRandomMessages }
                     );
                 });
 
-                xit('afecta el estado al añadir al final el mensaje dispatcheado al estado de messages', () => {
+                it('afecta el estado al añadir al final el mensaje dispatcheado al estado de messages', () => {
 
                     const dispatchedMessage = testUtilities.createOneRandomMessage();
 
@@ -443,7 +443,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
                 });
 
-                xit('setea messages a un arreglo diferente al del estado previo', () => {
+                it('setea messages a un arreglo diferente al del estado previo', () => {
 
                     const originalState = testingStore.getState();
                     const dispatchedMessage = testUtilities.createOneRandomMessage();
@@ -480,7 +480,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
                     let inboxWrapper;
                     beforeEach('Get an <Inbox />', () => {
-                        inboxWrapper = shallow(<Inbox />, {context: {store: actualStore}});
+                        inboxWrapper = shallow(<Inbox />, { context: { store: actualStore } });
                         // estamos simulando el montado del componente simplemente llamando el método `componentDidMount` de este componente (si haz definido uno)
                         if (inboxWrapper.instance().componentDidMount) {
                             inboxWrapper.instance().componentDidMount();
@@ -530,6 +530,6 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
         });
 
 
-   });
+    });
 
 });
