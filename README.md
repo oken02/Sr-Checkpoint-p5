@@ -16,7 +16,7 @@ Asegurate de completar los specs que estan en los siguientes archivos:
 
 ## Comenzando
 
-**Forkea** y clona este repositorio. Corre `npm install`, y luego ejecutá lo siguiente para correr todos los tests:
+**Forkea** y clona este repositorio. Corre `npm i` para instalar dependencias, y luego ejecutá lo siguiente para correr todos los tests:
 
 ```bash
 npm test
