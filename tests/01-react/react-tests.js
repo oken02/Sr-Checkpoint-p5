@@ -65,19 +65,19 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             // para que matchie el string HTML mostrado. Podés pasar esto en una 
             // manera "trivial", pero mira más o menos 5 tests abajo para entender el giro... 
      
-            xit('incluye el "FROM" como un h1', () => {
+            it('incluye el "FROM" como un h1', () => {
                 expect(messageWrapper.find('h1')).to.have.html('<h1>From: <span>guille@plataforma5.la</span></h1>');
             });
 
-            xit('incluye el "TO" como un h2', () => {
+            it('incluye el "TO" como un h2', () => {
                 expect(messageWrapper.find('h2')).to.have.html('<h2>To: <span>toni@plataforma5.la</span></h2>');
             });
 
-            xit('incluye el "SUBJECT" como un h3', () => {
+            it('incluye el "SUBJECT" como un h3', () => {
                 expect(messageWrapper.find('h3')).to.have.html('<h3>Subject: <span>re: curriculum updates</span></h3>');
             });
 
-            xit('incluye el "BODY" como un p', () => {
+            it('incluye el "BODY" como un p', () => {
                 expect(messageWrapper.find('p')).to.have.html('<p>Deberíamos enseñar React!</p>');
             });
 
@@ -87,11 +87,11 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             // debería variar basado en la data pasada. ¿De dónde proviene esa data?
             // ¿Cómo obtenes acceso a él? Volve al `beforeEach` block para verlo.
 
-            xit('no esta harcodeado', () => {
+            it('no esta harcodeado', () => {
                 const aDifferentMessage = {
                     id: 6,
                     from: {email: 'toni@plataforma5.la'},
-                    to: {email: 'guille@plarafroma5.la'},
+                    to: {email: 'guille@platafroma5.la'},
                     subject: 'Re: In re: curriculum updates',
                     body: 'Joyaaa!'
                 };
@@ -122,7 +122,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             // como agregar un click handler que llame a la función con los argumentos
             // específicos
 
-            xit('cuando clickeamos, invoca una función pasada como la propiedad markAsRead con el id del mensaje', () => {
+            it('cuando clickeamos, invoca una función pasada como la propiedad markAsRead con el id del mensaje', () => {
 
                 // La función pasada al `markAsRead` no debería ser llamada inmediatamente.
                 expect(markAsReadSpy).not.to.have.been.called; // eslint-disable-line
@@ -163,7 +163,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
         // ¿Cómo (o dónde) definís el estado inicial de un componente de React?
 
-        xit('empieza con un estado inicial de un arreglo vacío de mensajes', () => {
+        it('empieza con un estado inicial de un arreglo vacío de mensajes', () => {
             const currentState = inboxWrapper.state();
             expect(currentState.messages).to.be.deep.equal([]);
         });
@@ -172,7 +172,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
             // No te preocupes sobre `markAsRead`, Esto no corresponde a este a estos tests
 
-            xit('esta compuesto de componentes <Message /> (NOTA: no es necesario un prop `markAsRead`)  basado en que es colocado en el estado', () => {
+                    it('esta compuesto de componentes <Message /> (NOTA: no es necesario un prop `markAsRead`)  basado en que es colocado en el estado', () => {
 
                 // Esto va a alterar el *estado local* del componente (`this.state`).
                 inboxWrapper.setState({messages: randomMessages});
@@ -208,7 +208,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
             newMessageFormWrapper = shallow(<NewMessageForm onSend={sendSpy} />);
         });
 
-        xit('setea el estado local cuando el input cambia', () => {
+        it('setea el estado local cuando el input cambia', () => {
 
             expect(newMessageFormWrapper.state()).to.be.deep.equal({
                 recipient: '',
@@ -248,7 +248,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
         // pase, el componente debería 1) invocar el prop `onSend`, y 2) pasar
         // el estado actual del componente. state.
 
-        xit('invoca la función `onSent` pasada con el estado local cuando el formulario se submitea', () => {
+        it('invoca la función `onSent` pasada con el estado local cuando el formulario se submitea', () => {
 
             const formInfo = {
                 recipient: 'santi@plaraforma5.la',
@@ -278,7 +278,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
             describe('createMessagesReceivedAction', () => {
 
-                xit('retorna la descripción de la accion esperada', () => {
+                it('retorna la descripción de la accion esperada', () => {
 
                     const messages = testUtilities.createRandomMessages(5);
 
@@ -299,7 +299,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
             describe('createLoadingAction', () => {
 
-                xit('retorna la descripción de la acción esperada', () => {
+                it('retorna la descripción de la acción esperada', () => {
 
                     const actionDescriptor = createLoadingAction();
 
@@ -313,7 +313,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
             describe('createNewMessageAction', () => {
 
-                xit('retorna la descripción de la acción esperada', () => {
+                it('retorna la descripción de la acción esperada', () => {
 
                     const message = testUtilities.createOneRandomMessage();
 
@@ -340,7 +340,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
                 testingStore = createStore(rootReducer);
             });
 
-            xit('tiene un estado inicial como el descripto', () => {
+            it('tiene un estado inicial como el descripto', () => {
                 const currentStoreState = testingStore.getState();
                 // Nuestro estado inicial tiene dos propiedades como se muestran.
                 expect(currentStoreState.messagesLoading).to.be.equal(false);
@@ -351,7 +351,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
             describe('reducer en MESSAGES_LOADING', () => {
 
-                xit('afecta el estado seteando messagesLoading a true y messages a un arreglo vacío', () => {
+                it('afecta el estado seteando messagesLoading a true y messages a un arreglo vacío', () => {
 
                     // una acción es dispatcheada...
                     testingStore.dispatch({
@@ -367,7 +367,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
                 });
 
-                xit('crea un NUEVO objeto de estado en cualquier acción dispatcheada', () => {
+                it('crea un NUEVO objeto de estado en cualquier acción dispatcheada', () => {
 
                     const currentStoreState = testingStore.getState();
 
@@ -394,7 +394,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
                     testingStore.replaceReducer(rootReducer);
                 });
 
-                xit('afecta el estado seteando messagesLoading a false y los messages a  losmensajes dispatcheados', () => {
+                it('afecta el estado seteando messagesLoading a false y los messages a  losmensajes dispatcheados', () => {
 
                     const randomMessages = testUtilities.createRandomMessages(10);
 
@@ -424,7 +424,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
                     );
                 });
 
-                xit('afecta el estado al añadir al final el mensaje dispatcheado al estado de messages', () => {
+                it('afecta el estado al añadir al final el mensaje dispatcheado al estado de messages', () => {
 
                     const dispatchedMessage = testUtilities.createOneRandomMessage();
 
@@ -443,7 +443,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
 
                 });
 
-                xit('setea messages a un arreglo diferente al del estado previo', () => {
+                it('setea messages a un arreglo diferente al del estado previo', () => {
 
                     const originalState = testingStore.getState();
                     const dispatchedMessage = testUtilities.createOneRandomMessage();
@@ -490,13 +490,13 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
                     // ¿Dónde/cómo inicializas el estado local? ¿Cómo obtenes
                     // el estado el store?
 
-                    xit('tiene un estado local inicial que refleja el estado actual del store', () => {
+                    it('tiene un estado local inicial que refleja el estado actual del store', () => {
                         const componentState = inboxWrapper.state();
                         expect(componentState.messagesLoading).to.be.false; // eslint-disable-line
                         expect(componentState.messages).to.be.deep.equal([]);
                     });
 
-                    xit('se subscribe a cambios del store de redux y siempre refleja el estado de forma correcta', () => {
+                    it('se subscribe a cambios del store de redux y siempre refleja el estado de forma correcta', () => {
 
                         actualStore.dispatch(createLoadingAction());
 
