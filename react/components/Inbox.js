@@ -6,20 +6,11 @@ export default class extends React.Component {
 
     constructor() {
         super();
-        this.state = store.getState()
-        store.subscribe(() => this.setState(store.getState()) )
-
     }
-   
-    
+
     render() {
         return (
             <div>
-                {this.state.messages.map(m=>{
-                    
-                    return <Message fullMessage={m} />
-
-                })}
                 <h1>Inbox</h1>
             </div>
         );
