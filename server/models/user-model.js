@@ -1,6 +1,9 @@
 import Sequelize from 'sequelize';
 import db from './_db';
 
-const User = db.define('user', {});
+class User extends Sequelize.Model {}
+Page.init({
+ 
+}, { sequelize : db, modelName: 'user' });
 
 export default User;
