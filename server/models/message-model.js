@@ -3,7 +3,7 @@ import db from './_db';
 const User = db.model('user');
 
 class Message extends Sequelize.Model {}
-Page.init({
+Message.init({
   
 }, { sequelize : db, modelName: 'message' });
 
