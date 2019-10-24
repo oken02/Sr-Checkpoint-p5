@@ -29,7 +29,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
             Promise.all = null;
         });
 
-        it('Es una función que retorna una promesa', () => {
+        xit('Es una función que retorna una promesa', () => {
             expect(Promise.map).to.be.a('function');
             const returnValue = Promise.map(['./package.json'], () => true);
             expect(returnValue).to.be.an.instanceof(Promise);
@@ -37,7 +37,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
 
         describe('promesa retornada', () => {
 
-            it('resuelve a elementos del arreglo ingresado transformado por iterador dado', () => {
+            xit('resuelve a elementos del arreglo ingresado transformado por iterador dado', () => {
 
                 const returnedPromise = Promise.map(
                     ['./package.json', './README.md'],
@@ -52,7 +52,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
 
             });
 
-            it('rechaza con el error arrojado por el primer iterador que arroje un error', () => {
+            xit('rechaza con el error arrojado por el primer iterador que arroje un error', () => {
 
                 const returnedPromise = Promise.map(
                     ['./package.json', './README.md', './.gitignore'],
@@ -87,7 +87,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
                 );
             });
 
-            it('el valor transoformado es el valor resuelto por la promesa', () => {
+            xit('el valor transoformado es el valor resuelto por la promesa', () => {
 
                 const mapPromise = Promise.map(filePaths, filePath => {
                     return readFile(filePath)
@@ -102,7 +102,7 @@ describe('▒▒▒ Extra Credit tests ▒▒▒', function () {
 
             });
 
-            it('mantiene el orden del arreglo de entrada', () => {
+            xit('mantiene el orden del arreglo de entrada', () => {
 
                 const mapPromise = Promise.map(filePaths, filePath => {
                     return readFile(filePath)
