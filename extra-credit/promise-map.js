@@ -1,1 +1,0 @@
-Promise.map = (collection, iterator) => {};
