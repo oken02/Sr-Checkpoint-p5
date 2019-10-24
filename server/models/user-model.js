@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import db from './_db';
 
 class User extends Sequelize.Model {}
-Page.init({
+User.init({
  
 }, { sequelize : db, modelName: 'user' });
 
