@@ -91,7 +91,7 @@ describe('▒▒▒ Frontend tests ▒▒▒', function () {
                 const aDifferentMessage = {
                     id: 6,
                     from: {email: 'toni@plataforma5.la'},
-                    to: {email: 'guille@plarafroma5.la'},
+                    to: {email: 'guille@platafroma5.la'},
                     subject: 'Re: In re: curriculum updates',
                     body: 'Joyaaa!'
                 };
