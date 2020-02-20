@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "babel-loader": "^7.1.2",
+    "babel-preset-es2015-node": "^6.1.1",
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.14.2",
     "express": "^4.13.3",
