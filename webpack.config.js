@@ -1,19 +1,31 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  devtool: 'sourcemaps',
-  entry: './react/main.js',
+  mode: "development", // "production" | "development" | "none"
+  entry: "./react/main.js",
   output: {
     path: __dirname,
-    publicPath: '/',
-    filename: 'bundle.js'
+    publicPath: "/",
+    filename: "bundle.js"
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        loaders: ['babel-loader'],
+        test: /jsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+            plugins: ["@babel/plugin-proposal-object-rest-spread"]
+          }
+        }
       }
     ]
-  }
+  },
+  resolve: {
+    extensions: [".js", ".jsx"]
+  },
+  devtool: "source-map",
+  context: __dirname
 };
