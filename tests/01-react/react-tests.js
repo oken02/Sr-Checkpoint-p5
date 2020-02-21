@@ -72,25 +72,25 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       // para que matchie el string HTML mostrado. Podés pasar esto en una
       // manera "trivial", pero mira más o menos 5 tests abajo para entender el giro...
 
-      it('incluye el "FROM" como un h1', () => {
+      xit('incluye el "FROM" como un h1', () => {
         expect(messageWrapper.find("h1")).to.have.html(
           "<h1>From: <span>guille@plataforma5.la</span></h1>"
         );
       });
 
-      it('incluye el "TO" como un h2', () => {
+      xit('incluye el "TO" como un h2', () => {
         expect(messageWrapper.find("h2")).to.have.html(
           "<h2>To: <span>toni@plataforma5.la</span></h2>"
         );
       });
 
-      it('incluye el "SUBJECT" como un h3', () => {
+      xit('incluye el "SUBJECT" como un h3', () => {
         expect(messageWrapper.find("h3")).to.have.html(
           "<h3>Subject: <span>re: curriculum updates</span></h3>"
         );
       });
 
-      it('incluye el "BODY" como un p', () => {
+      xit('incluye el "BODY" como un p', () => {
         expect(messageWrapper.find("p")).to.have.html(
           "<p>Deberíamos enseñar React!</p>"
         );
@@ -102,7 +102,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       // debería variar basado en la data pasada. ¿De dónde proviene esa data?
       // ¿Cómo obtenes acceso a él? Volve al `beforeEach` block para verlo.
 
-      it("no esta harcodeado", () => {
+      xit("no esta harcodeado", () => {
         const aDifferentMessage = {
           id: 6,
           from: { email: "toni@plataforma5.la" },
@@ -147,7 +147,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       // como agregar un click handler que llame a la función con los argumentos
       // específicos
 
-      it("cuando clickeamos, invoca una función pasada como la propiedad markAsRead con el id del mensaje", () => {
+      xit("cuando clickeamos, invoca una función pasada como la propiedad markAsRead con el id del mensaje", () => {
         // La función pasada al `markAsRead` no debería ser llamada inmediatamente.
         expect(markAsReadSpy).not.to.have.been.called; // eslint-disable-line
 
@@ -183,7 +183,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
 
     // ¿Cómo (o dónde) definís el estado inicial de un componente de React?
 
-    it("empieza con un estado inicial de un arreglo vacío de mensajes", () => {
+    xit("empieza con un estado inicial de un arreglo vacío de mensajes", () => {
       const currentState = inboxWrapper.state();
       expect(currentState.messages).to.be.deep.equal([]);
     });
@@ -191,7 +191,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
     describe("contenido visual", () => {
       // No te preocupes sobre `markAsRead`, Esto no corresponde a este a estos tests
 
-      it("esta compuesto de componentes <Message /> (NOTA: no es necesario un prop `markAsRead`)  basado en que es colocado en el estado", () => {
+      xit("esta compuesto de componentes <Message /> (NOTA: no es necesario un prop `markAsRead`)  basado en que es colocado en el estado", () => {
         // Esto va a alterar el *estado local* del componente (`this.state`).
         inboxWrapper.setState({ messages: randomMessages });
         // Debería haber ahora un montón de componentes `Message` en el output.
@@ -223,7 +223,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       newMessageFormWrapper = shallow(<NewMessageForm onSend={sendSpy} />);
     });
 
-    it("setea el estado local cuando el input cambia", () => {
+    xit("setea el estado local cuando el input cambia", () => {
       expect(newMessageFormWrapper.state()).to.be.deep.equal({
         recipient: "",
         subject: "",
@@ -285,7 +285,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
     // pase, el componente debería 1) invocar el prop `onSend`, y 2) pasar
     // el estado actual del componente. state.
 
-    it("invoca la función `onSend` pasada con el estado local cuando el formulario se submitea", () => {
+    xit("invoca la función `onSend` pasada con el estado local cuando el formulario se submitea", () => {
       const formInfo = {
         recipient: "santi@plaraforma5.la",
         subject: "Hola Santi!",
@@ -311,7 +311,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       // Action creators son funciones que retornan objetos de acciones.
 
       describe("createMessagesReceivedAction", () => {
-        it("retorna la descripción de la accion esperada", () => {
+        xit("retorna la descripción de la accion esperada", () => {
           const messages = testUtilities.createRandomMessages(5);
 
           // Aquí llamamos la acción `createMessagesReceivedAction`
@@ -328,7 +328,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       });
 
       describe("createLoadingAction", () => {
-        it("retorna la descripción de la acción esperada", () => {
+        xit("retorna la descripción de la acción esperada", () => {
           const actionDescriptor = createLoadingAction();
 
           expect(actionDescriptor).to.be.deep.equal({
@@ -338,7 +338,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       });
 
       describe("createNewMessageAction", () => {
-        it("retorna la descripción de la acción esperada", () => {
+        xit("retorna la descripción de la acción esperada", () => {
           const message = testUtilities.createOneRandomMessage();
 
           const actionDescriptor = createNewMessageAction(message);
@@ -360,7 +360,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
         testingStore = createStore(rootReducer);
       });
 
-      it("tiene un estado inicial como el descripto", () => {
+      xit("tiene un estado inicial como el descripto", () => {
         const currentStoreState = testingStore.getState();
         // Nuestro estado inicial tiene dos propiedades como se muestran.
         expect(currentStoreState.messagesLoading).to.be.equal(false);
@@ -370,7 +370,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       // "en MESSAGES_LOADING" significa cuando una acción de ese tipo es dispatcheada
 
       describe("reducer en MESSAGES_LOADING", () => {
-        it("afecta el estado seteando messagesLoading a true y messages a un arreglo vacío", () => {
+        xit("afecta el estado seteando messagesLoading a true y messages a un arreglo vacío", () => {
           // una acción es dispatcheada...
           testingStore.dispatch({
             type: MESSAGES_LOADING
@@ -384,7 +384,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
           expect(newState.messages).to.be.deep.equal([]);
         });
 
-        it("crea un NUEVO objeto de estado en cualquier acción dispatcheada", () => {
+        xit("crea un NUEVO objeto de estado en cualquier acción dispatcheada", () => {
           const currentStoreState = testingStore.getState();
 
           testingStore.dispatch({
@@ -412,7 +412,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
           testingStore.replaceReducer(rootReducer);
         });
 
-        it("afecta el estado seteando messagesLoading a false y los messages a los mensajes dispatcheados", () => {
+        xit("afecta el estado seteando messagesLoading a false y los messages a los mensajes dispatcheados", () => {
           const randomMessages = testUtilities.createRandomMessages(10);
 
           testingStore.dispatch({
@@ -438,7 +438,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
           );
         });
 
-        it("afecta el estado al añadir al final el mensaje dispatcheado al estado de messages", () => {
+        xit("afecta el estado al añadir al final el mensaje dispatcheado al estado de messages", () => {
           const dispatchedMessage = testUtilities.createOneRandomMessage();
 
           testingStore.dispatch({
@@ -454,7 +454,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
           expect(lastMessageOnState).to.be.deep.equal(dispatchedMessage);
         });
 
-        it("setea messages a un arreglo diferente al del estado previo", () => {
+        xit("setea messages a un arreglo diferente al del estado previo", () => {
           const originalState = testingStore.getState();
           const dispatchedMessage = testUtilities.createOneRandomMessage();
 

@@ -23,14 +23,14 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
       // *Traducción del Assertion*:
       // Este assertion espera que el modelo User va a
       // poner una columna `email` en la tabla users.
-      it("tiene la definición de schema esperado", () => {
+      xit("tiene la definición de schema esperado", () => {
         expect(User.tableAttributes.email).to.be.an("object");
       });
 
       describe("validaciones", () => {
         // *Traducción del Assertion*:
         // La columand `email` debería ser un campo requerido.
-        it("requiere email", () => {
+        xit("requiere email", () => {
           const user = User.build();
           return user
             .validate()
@@ -54,27 +54,27 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
         // *Traducción del Assertion*:
         // Este assertion espera que el modelo Message ponga una
         // columna `subject` en la tabla messages.
-        it("tiene la definición de subject esperada", () => {
+        xit("tiene la definición de subject esperada", () => {
           expect(Message.tableAttributes.subject).to.be.an("object");
         });
 
         // *Traducción del Assertion*:
         // Este assertion espera que el modelo Message vaya a
         // poner la columna `body` en la tabla messages
-        it("has expected body definition", () => {
+        xit("has expected body definition", () => {
           expect(Message.tableAttributes.body).to.be.an("object");
         });
       });
 
       describe("validaciones", () => {
-        it('tiene un valor por defecto "No Subject"', () => {
+        xit('tiene un valor por defecto "No Subject"', () => {
           // .build crea una instancia de un modelo
           // sin salvar la data representada a la base de datos.
           const message = Message.build();
           expect(message.subject).to.be.equal("No Subject");
         });
 
-        it("requiere un body", () => {
+        xit("requiere un body", () => {
           const message = Message.build();
           return message
             .validate()
@@ -146,17 +146,17 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
           // Asegurate de leer el largo comentario en server/models/index.js
           // antes de intentar el siguiente assertion.
           describe("getAllWhereSender", () => {
-            it("existe", () => {
+            xit("existe", () => {
               expect(Message.getAllWhereSender).to.be.a("function");
             });
 
-            it("retorna una promise", () => {
+            xit("retorna una promise", () => {
               expect(Message.getAllWhereSender(annaId).then).to.be.a(
                 "function"
               );
             });
 
-            it("resuelve a todos los mensajes enviados por Anna", () => {
+            xit("resuelve a todos los mensajes enviados por Anna", () => {
               return Message.getAllWhereSender(annaId).then(messages => {
                 expect(messages.length).to.be.equal(2);
                 expect(messages).to.contain.a.thing.with.property(
@@ -170,14 +170,14 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
               });
             });
 
-            it("resuelve a todos los mensajes enviados por Elsa", () => {
+            xit("resuelve a todos los mensajes enviados por Elsa", () => {
               return Message.getAllWhereSender(elsaId).then(messages => {
                 expect(messages.length).to.be.equal(1);
                 expect(messages[0].id).to.be.equal(elsaFirstMessage);
               });
             });
 
-            it("Carga (EAGERLY LOADS) la información completa de ambos en remitente y el receptor", () => {
+            xit("Carga (EAGERLY LOADS) la información completa de ambos en remitente y el receptor", () => {
               // http://sequelize.readthedocs.io/en/v3/docs/models-usage/#eager-loading
               // No te olvides de aliases explicadas en server/models/index.js!
 
@@ -209,11 +209,11 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
               });
             });
 
-            it("exists", () => {
+            xit("exists", () => {
               expect(testMessage.truncateSubject).to.be.a("function");
             });
 
-            it("retorna el objeto mensaje completo pero con el texto del subject limitado basado en el número pasado para determinar su length", () => {
+            xit("retorna el objeto mensaje completo pero con el texto del subject limitado basado en el número pasado para determinar su length", () => {
               // Aquí estamos esperando que el *valor retornado* de .truncateSubject()
               // es *la instancia completa del objeto message* con su propiedad .subject alterada.
               const messageWithTruncatedSubject = testMessage.truncateSubject(
@@ -228,7 +228,7 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
               );
             });
 
-            it("agrega puntos suspensivos (...) luego del texto truncado si true es pasado como un segundo argumento", () => {
+            xit("agrega puntos suspensivos (...) luego del texto truncado si true es pasado como un segundo argumento", () => {
               expect(testMessage.truncateSubject(4, true).subject).to.be.equal(
                 "I do..."
               );
@@ -293,7 +293,7 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
       });
 
       describe("users", () => {
-        it("sirve todos los usuarios en el pedido de GET /", () => {
+        xit("sirve todos los usuarios en el pedido de GET /", () => {
           return agent
             .get("/users")
             .expect(200)
@@ -305,7 +305,7 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
             });
         });
 
-        it("actualiza un usuario en PUT /{{usersId}}, enviando un 201 como respuesta", () => {
+        xit("actualiza un usuario en PUT /{{usersId}}, enviando un 201 como respuesta", () => {
           return agent
             .put(`/users/${obama}`)
             .send({
@@ -324,7 +324,7 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
       describe("messages", () => {
         // encuentra todos los mensajes done el campo `to` coincida con la variable ID
 
-        it("sirve todos los mensajes de un usuario específico en GET /to/{{recipientId}}", () => {
+        xit("sirve todos los mensajes de un usuario específico en GET /to/{{recipientId}}", () => {
           return agent
             .get(`/messages/to/${obama}`)
             .expect(200)
@@ -337,7 +337,7 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
 
         // encuentra todos los mensajes donde el campo `from` coincida con la variable ID
 
-        it("sirve todos los mensajes de un remitente especifico en GET /from/{{senderId}}", () => {
+        xit("sirve todos los mensajes de un remitente especifico en GET /from/{{senderId}}", () => {
           return agent
             .get(`/messages/from/${obama}`)
             .expect(200)
@@ -354,7 +354,7 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
 
         // recuerdas eager loading?
 
-        it("sirve todos los mensajes completada con referencia a los usuarios específicos en GET /to/{{recipientId}}", () => {
+        xit("sirve todos los mensajes completada con referencia a los usuarios específicos en GET /to/{{recipientId}}", () => {
           return agent
             .get(`/messages/to/${obama}`)
             .expect(200)
@@ -366,7 +366,7 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
             });
         });
 
-        it(`sirve todos los mensajes de un remitente especifico en GET /from/{{senderId}}
+        xit(`sirve todos los mensajes de un remitente especifico en GET /from/{{senderId}}
                     y usa el método estatico delmodelo Message getAllWhereSender en el proceso`, () => {
           // http://sinonjs.org/docs/#spies
           const getAllWhereSenderSpy = sinon.spy(Message, "getAllWhereSender");
@@ -387,7 +387,7 @@ describe("▒▒▒ Backend tests ▒▒▒", () => {
             });
         });
 
-        it("agrega un nuevo mensaje en adds POST /, respondiendo con un 201 y creando el mensaje", () => {
+        xit("agrega un nuevo mensaje en adds POST /, respondiendo con un 201 y creando el mensaje", () => {
           return agent
             .post("/messages")
             .send({
