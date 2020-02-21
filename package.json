@@ -8,7 +8,7 @@
     "server-test": "mocha ./tests/02-backend --recursive --watch --require @babel/register",
     "js-test": "mocha ./tests/03-js --watch --require @babel/register",
     "extra-credit": "mocha ./tests/04-extra-credit --watch --require @babel/register",
-    "db-init": "pg-init checkpoint_senior",
+    "db-init": "createdb checkpoint_senior",
     "postinstall": "npm run db-init",
     "start": "webpack-dev-server"
   },
