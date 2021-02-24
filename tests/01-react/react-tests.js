@@ -176,7 +176,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function () {
     describe("contenido visual", () => {
       // No te preocupes sobre `markAsRead`, Esto no corresponde a este a estos tests
 
-      it("esta compuesto de componentes <Message /> (NOTA: no es necesario un prop `markAsRead`)  basado en que es colocado en el estado", () => {
+      xit("esta compuesto de componentes <Message /> (NOTA: no es necesario un prop `markAsRead`)  basado en que es colocado en el estado", () => {
         // Esto va a alterar el *estado local* del componente (`this.state`).
         inboxWrapper.setState({ messages: randomMessages });
         // Debería haber ahora un montón de componentes `Message` en el output.
