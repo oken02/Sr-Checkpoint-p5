@@ -1,19 +1,16 @@
-import React from 'react';
-import Message from './Message';
-import store from '../redux/store';
+import React from "react";
+import Message from "./Message";
 
 export default class extends React.Component {
+  constructor() {
+    super();
+  }
 
-    constructor() {
-        super();
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Inbox</h1>
-            </div>
-        );
-    }
-
+  render() {
+    return (
+      <div>
+        <h1>Inbox</h1>
+      </div>
+    );
+  }
 }

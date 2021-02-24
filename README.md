@@ -34,7 +34,7 @@ npm run extra-credit
 Para solo correr un `describe` o `it`, podés también encadenar un `.only`:
 
 ```js
-it.only('Hace algo', testFunc);
+it.only("Hace algo", testFunc);
 ```
 
 ## Credito Extra
@@ -45,4 +45,4 @@ Para los valientes, el extra crédito (implementar `Promise.map`) esta disponibl
 
 1. `git add -A`
 2. `git commit -m 'entrega final'`
-3. `git push origin master`
+3. `git push origin main`

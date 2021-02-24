@@ -1,6 +1,5 @@
 import React from "react";
-import { createStore } from "redux";
-import { range, last } from "lodash";
+import { range } from "lodash";
 
 import chai, { expect } from "chai";
 import chaiEnzyme from "chai-enzyme";
@@ -16,38 +15,24 @@ import faker from "faker";
 import Message from "../../react/components/Message";
 import Inbox from "../../react/components/Inbox";
 import NewMessageForm from "../../react/components/NewMessageForm";
-import rootReducer from "../../react/redux/reducer";
-import actualStore from "../../react/redux/store";
-import {
-  MESSAGES_RECEIVED,
-  MESSAGES_LOADING,
-  NEW_MESSAGE
-} from "../../react/redux/constants";
-import {
-  createLoadingAction,
-  createMessagesReceivedAction,
-  createNewMessageAction
-} from "../../react/redux/actions";
 
-const createRandomMessages = amount => {
-  return range(0, amount).map(index => {
+const createRandomMessages = (amount) => {
+  return range(0, amount).map((index) => {
     return {
       id: index + 1,
       from: { email: faker.internet.email() },
       to: { email: faker.internet.email() },
       subject: faker.lorem.sentence(),
-      body: faker.lorem.paragraph()
+      body: faker.lorem.paragraph(),
     };
   });
 };
 const testUtilities = {
   createRandomMessages,
-  createOneRandomMessage: () => createRandomMessages(1)[0]
+  createOneRandomMessage: () => createRandomMessages(1)[0],
 };
 
-// NOTA: Estos specs usan vanilla React & Redux, no react-redux
-
-describe("▒▒▒ Frontend tests ▒▒▒", function() {
+describe("▒▒▒ Frontend tests ▒▒▒", function () {
   describe("Message", () => {
     describe("contenido visual", () => {
       // Antes de cada `it` spec, instanciamos un nuevo componente de React `Message`
@@ -62,7 +47,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
           from: { email: "guille@plataforma5.la" },
           to: { email: "toni@plataforma5.la" },
           subject: "re: curriculum updates",
-          body: "Deberíamos enseñar React!"
+          body: "Deberíamos enseñar React!",
         };
         // crea el wrapper testeable del componente
         messageWrapper = shallow(<Message fullMessage={messageData} />);
@@ -106,9 +91,9 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
         const aDifferentMessage = {
           id: 6,
           from: { email: "toni@plataforma5.la" },
-          to: { email: "guille@platafroma5.la" },
+          to: { email: "guille@platafroma5.la" }, // typo!
           subject: "Re: In re: curriculum updates",
-          body: "Joyaaa!"
+          body: "Joyaaa!",
         };
         // Hacemos un nuevo componente con distinta data, y chequeamos su contenido
         const differentMessageWrapper = shallow(
@@ -174,7 +159,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
 
     let inboxWrapper;
     beforeEach("Crea <Inbox />", () => {
-      inboxWrapper = shallow(<Inbox />, { context: { store: actualStore } });
+      inboxWrapper = shallow(<Inbox />);
       // estamos simulando el montado del componente simplemente llamando el método `componentDidMount` para este componente (si haz definido uno)
       if (inboxWrapper.instance().componentDidMount) {
         inboxWrapper.instance().componentDidMount();
@@ -191,7 +176,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
     describe("contenido visual", () => {
       // No te preocupes sobre `markAsRead`, Esto no corresponde a este a estos tests
 
-      xit("esta compuesto de componentes <Message /> (NOTA: no es necesario un prop `markAsRead`)  basado en que es colocado en el estado", () => {
+      it("esta compuesto de componentes <Message /> (NOTA: no es necesario un prop `markAsRead`)  basado en que es colocado en el estado", () => {
         // Esto va a alterar el *estado local* del componente (`this.state`).
         inboxWrapper.setState({ messages: randomMessages });
         // Debería haber ahora un montón de componentes `Message` en el output.
@@ -227,7 +212,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       expect(newMessageFormWrapper.state()).to.be.deep.equal({
         recipient: "",
         subject: "",
-        body: ""
+        body: "",
       });
 
       // Recordás los forms? Tenemos algunos elementos los cuales estan cambiando. ¿Cómo:
@@ -239,7 +224,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       const recipientInput = newMessageFormWrapper.find("#recipient-field");
       // Ahora causamos un cambio, con nueva data
       recipientInput.simulate("change", {
-        target: { value: "facu@plataforma5.la", name: "recipient" }
+        target: { value: "facu@plataforma5.la", name: "recipient" },
       });
       // El estado debería haber actualizado su estado correctamente
       expect(newMessageFormWrapper.state()).to.have.property(
@@ -251,7 +236,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
 
       const subjectInput = newMessageFormWrapper.find("#subject-field");
       subjectInput.simulate("change", {
-        target: { value: "Hola?", name: "subject" }
+        target: { value: "Hola?", name: "subject" },
       });
       expect(newMessageFormWrapper.state()).to.have.property(
         "recipient",
@@ -265,7 +250,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
 
       const bodyInput = newMessageFormWrapper.find("#body-field");
       bodyInput.simulate("change", {
-        target: { value: `Ya todos bajaron a comer?`, name: "body" }
+        target: { value: `Ya todos bajaron a comer?`, name: "body" },
       });
       expect(newMessageFormWrapper.state()).to.have.property(
         "recipient",
@@ -289,7 +274,7 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       const formInfo = {
         recipient: "santi@plaraforma5.la",
         subject: "Hola Santi!",
-        body: "Hola."
+        body: "Hola.",
       };
 
       newMessageFormWrapper.setState(formInfo);
@@ -303,236 +288,6 @@ describe("▒▒▒ Frontend tests ▒▒▒", function() {
       expect(sendSpy).to.have.been.called; // eslint-disable-line
       expect(sendSpy).to.have.been.calledWith(formInfo);
       expect(sendSpy.calledOnce).to.be.equal(true);
-    });
-  });
-
-  describe("Arquitectura Redux", () => {
-    describe("action creators", () => {
-      // Action creators son funciones que retornan objetos de acciones.
-
-      describe("createMessagesReceivedAction", () => {
-        xit("retorna la descripción de la accion esperada", () => {
-          const messages = testUtilities.createRandomMessages(5);
-
-          // Aquí llamamos la acción `createMessagesReceivedAction`
-          // con un grupo de mensaje.
-          const actionDescriptor = createMessagesReceivedAction(messages);
-
-          // El action creator debería haber retornado un objeto de acción
-          // como este objeto literal:
-          expect(actionDescriptor).to.be.deep.equal({
-            type: MESSAGES_RECEIVED,
-            messages: messages
-          });
-        });
-      });
-
-      describe("createLoadingAction", () => {
-        xit("retorna la descripción de la acción esperada", () => {
-          const actionDescriptor = createLoadingAction();
-
-          expect(actionDescriptor).to.be.deep.equal({
-            type: MESSAGES_LOADING
-          });
-        });
-      });
-
-      describe("createNewMessageAction", () => {
-        xit("retorna la descripción de la acción esperada", () => {
-          const message = testUtilities.createOneRandomMessage();
-
-          const actionDescriptor = createNewMessageAction(message);
-
-          expect(actionDescriptor).to.be.deep.equal({
-            type: NEW_MESSAGE,
-            message: message
-          });
-        });
-      });
-    });
-
-    // Recuerda, reducers reciben el viejo estado y el objeto de una acción, y
-    // retorna un nuevo estado.
-
-    describe("store/reducer", () => {
-      let testingStore;
-      beforeEach("crea un store para testear el reducer", () => {
-        testingStore = createStore(rootReducer);
-      });
-
-      xit("tiene un estado inicial como el descripto", () => {
-        const currentStoreState = testingStore.getState();
-        // Nuestro estado inicial tiene dos propiedades como se muestran.
-        expect(currentStoreState.messagesLoading).to.be.equal(false);
-        expect(currentStoreState.messages).to.be.deep.equal([]);
-      });
-
-      // "en MESSAGES_LOADING" significa cuando una acción de ese tipo es dispatcheada
-
-      describe("reducer en MESSAGES_LOADING", () => {
-        xit("afecta el estado seteando messagesLoading a true y messages a un arreglo vacío", () => {
-          // una acción es dispatcheada...
-          testingStore.dispatch({
-            type: MESSAGES_LOADING
-          });
-
-          const newState = testingStore.getState();
-
-          // y uola, el estaedo ha cambiado! La función reducer es
-          // responsable de generar el nuevo estado.
-          expect(newState.messagesLoading).to.be.true; // eslint-disable-line
-          expect(newState.messages).to.be.deep.equal([]);
-        });
-
-        xit("crea un NUEVO objeto de estado en cualquier acción dispatcheada", () => {
-          const currentStoreState = testingStore.getState();
-
-          testingStore.dispatch({
-            type: MESSAGES_LOADING
-          });
-
-          const subsequentStoreState = testingStore.getState();
-
-          // Recordas como copiar propiedades a un nuevo objeto?
-          // Deberías no estar modificando el estado previo de Redux!
-
-          expect(currentStoreState).to.not.be.equal(subsequentStoreState);
-        });
-      });
-
-      describe("reducer en MESSAGES_RECEIVED", () => {
-        beforeEach("inicializa el store para que cargue mensajes", () => {
-          testingStore.replaceReducer(() => ({
-            ...testingStore.getState(),
-            messagesLoading: false
-          }));
-          testingStore.dispatch({
-            type: "INITIALIZE_FOR_MESSAGES_RECEIVED_TEST"
-          });
-          testingStore.replaceReducer(rootReducer);
-        });
-
-        xit("afecta el estado seteando messagesLoading a false y los messages a los mensajes dispatcheados", () => {
-          const randomMessages = testUtilities.createRandomMessages(10);
-
-          testingStore.dispatch({
-            type: MESSAGES_RECEIVED,
-            messages: randomMessages
-          });
-
-          const newState = testingStore.getState();
-
-          expect(newState.messagesLoading).to.be.false; // eslint-disable-line
-          expect(newState.messages).to.be.deep.equal(randomMessages);
-        });
-      });
-
-      describe("reducer en NEW_MESSAGE", () => {
-        let existingRandomMessages;
-        beforeEach(() => {
-          existingRandomMessages = testUtilities.createRandomMessages(5);
-          testingStore = createStore(
-            rootReducer,
-            // esto solo setea el estado incial de nuestro store.
-            { messagesLoading: false, messages: existingRandomMessages }
-          );
-        });
-
-        xit("afecta el estado al añadir al final el mensaje dispatcheado al estado de messages", () => {
-          const dispatchedMessage = testUtilities.createOneRandomMessage();
-
-          testingStore.dispatch({
-            type: NEW_MESSAGE,
-            message: dispatchedMessage
-          });
-
-          const newState = testingStore.getState();
-          const lastMessageOnState = last(newState.messages);
-
-          // el action NEW_MESSAGE, al pasar por el reducer, da como resultado un nuevo mensaje al final del array de `messages`.
-          expect(newState.messages).to.have.length(6);
-          expect(lastMessageOnState).to.be.deep.equal(dispatchedMessage);
-        });
-
-        xit("setea messages a un arreglo diferente al del estado previo", () => {
-          const originalState = testingStore.getState();
-          const dispatchedMessage = testUtilities.createOneRandomMessage();
-
-          testingStore.dispatch({
-            type: NEW_MESSAGE,
-            message: dispatchedMessage
-          });
-
-          const newState = testingStore.getState();
-
-          // Una vez mas, no mutes data vieja! Genera nueva data
-          // que se vea de la forma que quieres. Hay muchas formas de
-          // hacer esto con arreglos.
-          expect(newState.messages).to.not.be.equal(originalState.messages);
-          expect(originalState.messages).to.have.length(5);
-        });
-      });
-    });
-
-    describe("EXTRA CREDITO", () => {
-      describe("conexión del componente", () => {
-        /*  --- EXTRA CREDITO ---
-         *   Las assertions en este bloque de describe asume que TODOS LOS OTROS han pasado.
-         *   Por favor solo continuá con esta porción una vez que todos los specs estén pasando.
-         */
-
-        describe("<Inbox />", () => {
-          let inboxWrapper;
-          beforeEach("Get an <Inbox />", () => {
-            inboxWrapper = shallow(<Inbox />, {
-              context: { store: actualStore }
-            });
-            // estamos simulando el montado del componente simplemente llamando el método `componentDidMount` de este componente (si haz definido uno)
-            if (inboxWrapper.instance().componentDidMount) {
-              inboxWrapper.instance().componentDidMount();
-            }
-          });
-
-          // ¿Dónde/cómo inicializas el estado local? ¿Cómo obtenes
-          // el estado el store?
-
-          xit("tiene un estado local inicial que refleja el estado actual del store", () => {
-            const componentState = inboxWrapper.state();
-            expect(componentState.messagesLoading).to.be.false; // eslint-disable-line
-            expect(componentState.messages).to.be.deep.equal([]);
-          });
-
-          xit("se subscribe a cambios del store de redux y siempre refleja el estado de forma correcta", () => {
-            actualStore.dispatch(createLoadingAction());
-
-            let currentComponentState = inboxWrapper.state();
-
-            expect(currentComponentState.messagesLoading).to.be.true; // eslint-disable-line
-            expect(currentComponentState.messages).to.be.deep.equal([]);
-
-            const randomMessages = testUtilities.createRandomMessages(10);
-            actualStore.dispatch(createMessagesReceivedAction(randomMessages));
-
-            currentComponentState = inboxWrapper.state();
-
-            expect(currentComponentState.messagesLoading).to.be.false; // eslint-disable-line
-            expect(currentComponentState.messages).to.be.deep.equal(
-              randomMessages
-            );
-
-            const randomNewMessage = testUtilities.createOneRandomMessage();
-
-            actualStore.dispatch(createNewMessageAction(randomNewMessage));
-
-            currentComponentState = inboxWrapper.state();
-
-            expect(currentComponentState.messages).to.be.deep.equal([
-              ...randomMessages,
-              randomNewMessage
-            ]);
-          });
-        });
-      });
     });
   });
 });
