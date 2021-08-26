@@ -1,16 +1,16 @@
 import React from "react";
 
-export default () => (
-  <div>
+export default ({ fullMessage,markAsRead }) => (
+  <div onClick={()=>markAsRead(fullMessage.id)}>
     <h1>
-      From: <span></span>
+      From: <span>{fullMessage.from.email}</span>
     </h1>
     <h2>
-      To: <span></span>
+      To: <span>{fullMessage.to.email}</span>
     </h2>
     <h3>
-      Subject: <span></span>
+      Subject: <span>{fullMessage.subject}</span>
     </h3>
-    <p></p>
+    <p>{fullMessage.body}</p>
   </div>
 );

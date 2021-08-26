@@ -22,3 +22,4 @@ Message.belongsTo(User, { as: 'to' });
 Message.belongsTo(User, { as: 'from' });
 
 export default db;
+
