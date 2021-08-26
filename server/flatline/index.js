@@ -3,25 +3,16 @@ export const groupBy = (collection, iterator) => {
   for (const el of collection) {
     const key = typeof iterator == "function" ? iterator(el) : el[iterator];
 
-
     if (res[key]) {
       res[key].push(el);
     } else {
       res[key] = [el];
     }
 
-
   }
   return res;
 };
 
-// function sayHello(name) {
-//   return "Hello, " + name;
-// }
-
-// function addExclamation(s) {
-//   return s + "!";
-// }
 
 export const flowRight = (...functions) => {
   //  [12345]
@@ -34,4 +25,3 @@ export const flowRight = (...functions) => {
   };
 };
 
-// flowRight(sayHello, addExclamation);
