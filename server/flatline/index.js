@@ -1,18 +1,27 @@
+// export const groupBy = (collection, iterator) => {
+//   const res = {};
+//   for (const el of collection) {
+//     const key = typeof iterator == "function" ? iterator(el) : el[iterator];
+
+//     if (res[key]) {
+//       res[key].push(el);
+//     } else {
+//       res[key] = [el];
+//     }
+//   }
+//   return res;
+// };
+
 export const groupBy = (collection, iterator) => {
   const res = {};
+
   for (const el of collection) {
     const key = typeof iterator == "function" ? iterator(el) : el[iterator];
-
-    if (res[key]) {
-      res[key].push(el);
-    } else {
-      res[key] = [el];
-    }
-
+    !res[key]?.push(el) && (res[key] = [el]);
   }
+
   return res;
 };
-
 
 export const flowRight = (...functions) => {
   //  [12345]
@@ -24,4 +33,3 @@ export const flowRight = (...functions) => {
     return initialValue[0];
   };
 };
-

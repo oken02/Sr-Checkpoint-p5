@@ -21,82 +21,41 @@ const readFile = function (filePath) {
 // Notece que no estamos utilizando un valor exportado.
 
 Promise.map = (paths, func) => {
+  const isPromiseHandler = (ins, rejMain, handler) => {
+    return new Promise((res) => {
+      ins = handler ? handler(ins) : ins;
+ 
+      if (ins instanceof Promise) {
+        ins.then(res, rejMain);
+      } else {
+        res(ins);
+      }
+    });
+  };
+
   return new Promise((res, rej) => {
     let actualCant = 1;
     const contents = [];
 
     paths.map((pathNoRes, idx) => {
-      new Promise((res3, rej3) => {
-        if (pathNoRes instanceof Promise) {
-          pathNoRes.then(res3, rej);
-        } else {
-          res3(pathNoRes);
-        }
-      }).then((path) => {
-        new Promise((res2, rej2) => {
-          const value = func(path);
-
-          if (value instanceof Promise) {
-            value.then(res2, rej);
-          } else {
-            res2(value);
-          }
-        })
+      isPromiseHandler(pathNoRes, rej).then((path) => {
+        isPromiseHandler(path, rej, func)
           .then((data) => {
             contents[idx] = data;
 
-            if (actualCant >= paths.length) {
+            if (actualCant++ == paths.length) {
+              console.log("CONTENT", contents);
               res(contents);
             }
-
-            actualCant++;
           })
+
           .catch(rej);
       });
     });
   });
 };
 
-// Promise.map = (paths, func) => {
-//   return new Promise((res, rej) => {
-//     let actualCant = 1;
 
-//     const contents = [];
-
-//     paths.map((path, idx) => {
-//       //   readFile(path).then((content) => {
-//     //   try {
-
-//         if (path instanceof Promise) {
-//             path.then(execute());
-
-//           } else {
-//             execute(path);
-//           }
-
-//         new Promise((res2, rej2) => {
-//           const value = func(path);
-
-//           if (value instanceof Promise) {
-//             value.then(res2,rej);
-//           } else {
-//             res2(value);
-//           }
-//         }).then((data) => {
-//           contents[idx] = data;
-
-//           if (actualCant >= paths.length) {
-//             console.log("RESSSSSSSSSSSSSSSS", contents);
-//             res(contents);
-//           }
-
-//           actualCant++;
-//         })
-//         .catch(rej)
-
-//     });
-//   });
-// };
 
 Promise.map(["./package.json", "./README.md"], (fileName) =>
   fileName.toUpperCase()
@@ -284,4 +243,3 @@ describe("▒▒▒ Extra Credit tests ▒▒▒", function () {
     });
   });
 });
-
