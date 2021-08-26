@@ -3,10 +3,10 @@ import db from "./_db";
 const User = db.model("user");
 
 class Message extends Sequelize.Model {
-  static getAllWhereSender(senderId) {
+  static getAllWhereSender(senderId, to) {
     return Message.findAll({
       where: {
-        fromId: senderId,
+        [to || "fromId"]: senderId,
       },
       include: [
         {

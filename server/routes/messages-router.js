@@ -7,34 +7,12 @@ const User = db.model("user");
 const router = express.Router();
 
 router.get("/to/:id", (req, res) => {
-  Message.findAll({
-    where: {
-      toId: req.params.id,
-    },
-    include: [
-      {
-        model: User,
-        as: "to",
-      },
-      {
-        model: User,
-        as: "from",
-      },
-    ],
-  }).then((messages) => {
+  Message.getAllWhereSender(req.params.id, "toId").then((messages) => {
     res.send(messages);
   });
 });
 
 router.get("/from/:id", (req, res) => {
-  //   Message.findAll({
-  //     where: {
-  //       fromId: req.params.id,
-  //     },
-  //   }).then((messages) => {
-  //     res.send(messages);
-  //   });
-
   Message.getAllWhereSender(req.params.id).then((messages) => {
     res.send(messages);
   });
