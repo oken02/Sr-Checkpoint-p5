@@ -1,4 +1,4 @@
-Bienvenido a tu ultimo Checkpoint en Plataforma 5
+## Pude completar este exámen técnico muy desafiante en Plataforma 5.
 
 ## Recursos
 
